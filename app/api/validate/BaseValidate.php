@@ -37,10 +37,38 @@ class BaseValidate extends Validate
         return true;
     }
 
-    // 自定义验证规则
+    /**
+     * 正整数验证
+     *
+     * @param $value
+     * @param string $rule
+     * @param string $data
+     * @param string $field
+     *
+     * @return bool
+     */
     protected function isPositiveInteger($value, $rule = '', $data = '', $field = '')
     {
         if ($value && is_numeric($value) && is_int($value + 0) && ($value + 0) > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * 非空验证
+     * @param $value
+     * @param string $rule
+     * @param string $data
+     * @param string $field
+     *
+     * @return bool
+     */
+    protected function isNotEmpty($value, $rule = '', $data = '', $field = '')
+    {
+        if (!empty($value)) {
             return true;
         }
         else {
