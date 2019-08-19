@@ -11,5 +11,8 @@
 
 use think\Route;
 
-//Route::get('api/:version/banner/:id', 'api/:version.Banner/getBanner', [], ['id'=>'\d+']);
-Route::get('api/:version/banner/:id', 'api/:version.Banner/getBanner');
+//Route::get('api/:version/banner/:id', 'api/:version.Banner/getBanner'); // 设定参数为整形，同时强制路由开启，否则 banner/all无法匹配
+Route::get('api/:version/banner/:id', 'api/:version.Banner/getBanner', [], ['id'=>'\d+']);
+
+Route::get('api/:version/banner/all', 'api/:version.Banner/getBannerAll');
+

@@ -33,6 +33,7 @@ class ExceptionHandler extends Handle
                 $this->code = 500;
                 $this->msg = '服务器内部错误';
                 $this->errorCode = 999;
+                // 记录位置错误
                 $this->recordErrorLog($e);
             }
         }
