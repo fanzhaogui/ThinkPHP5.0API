@@ -8,6 +8,8 @@
 namespace app\api\service;
 
 
+use app\lib\exception\TokenException;
+
 class Token extends BaseService
 {
 
@@ -22,5 +24,31 @@ class Token extends BaseService
         $timestamp = $_SERVER['REQUEST_TIME'];
         $salt = config('secure.token_salt');
         return md5($randChars . $timestamp . $salt);
+    }
+
+    public static function getUserInfoByToken()
+    {
+        $token = request()->header('token');
+        if (!$token) {
+            throw new TokenException([
+                'msg' => '获取token失败或未传递token'
+            ]);
+        }
+
+        $cacheValue = cache($token);
+        if (!$cacheValue) {
+            throw new TokenException([
+                'msg' => '通过token获取缓存信息失败'
+            ]);
+        }
+
+        return json_decode($cacheValue);
+    }
+
+
+    public static function getCurrentUid()
+    {
+        $user = self::getUserInfoByToken();
+        return $user['user_id'];
     }
 }

@@ -8,6 +8,8 @@
 namespace app\api\service;
 
 
+use app\api\model\User;
+use app\lib\exception\TokenException;
 use app\lib\exception\WeChatException;
 use think\Exception;
 use think\Log;
@@ -37,7 +39,12 @@ class UserToken extends BaseService
     {
         $result = curl_get($this->wxLoginUrl);
         $wxResult = json_decode($result, TRUE);
-        Log::save($result);
+        // openid	string	用户唯一标识
+        // session_key	string	会话密钥
+        // unionid	string	用户在开放平台的唯一标识符，在满足 UnionID 下发条件的情况下会返回，详见 UnionID 机制说明。
+        // errcode	number	错误码
+        // errmsg	string	错误信息
+
         if (empty($wxResult)) {
             throw new Exception('获取session_key以及openID时异常，微信内部错误');
         } else {
@@ -57,7 +64,40 @@ class UserToken extends BaseService
         // 数据库里看一下，这个openid是不是已经存在
         // 如果存在，则不处理，如果不存在那么新增一条user记录
         // 把令牌返回到客户端去
+        $user = new User();
+        $ret = $user->where('openid', '=', $wxResult['openid'])->find();
+        if (!$ret) {
+            $user->openid = $wxResult['openid'];
+            $user->save();
+            $uid = $user->id;
+        } else {
+            $uid = $ret['id'];
+        }
+
+        // token 做键，缓存用户数据
+        $token = Token::generateToken();
+        $cacheValue = $this->prepareCacheValue($uid, $wxResult);
+        $expire = 7200;
+
+        $result = cache($token, $cacheValue, $expire);
+        if (!$result) {
+            // 缓存失败
+            throw new TokenException([
+                'msg' => 'token缓存失败'
+            ]);
+        }
+        return $token;
     }
+
+    // 缓存信息
+    protected function prepareCacheValue($uid, $wxResult)
+    {
+        return json_encode([
+            'user_id' => $uid,
+            'openid' => $wxResult['openid'],
+        ]);
+    }
+
 
     private function processLoginError($wxResult)
     {

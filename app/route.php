@@ -25,4 +25,9 @@ Route::get('api/:version/category/list', 'api/:version.Category/getCateList');
 
 Route::get('api/:version/productrecent/:count', 'api/:version.Product/getRecent');
 
-Route::get('api/:version/categoryproduct/:id', 'api/:version.Product/getAllInCategory');
+Route::get('api/:version/categoryproduct/:id', 'api/:version.Product/getAllInCategory', [], ['id'=>'\d+']);
+
+
+//
+
+Route::post('api/:version/activity/queue', 'api/:version.ActivityQueue/newOne');

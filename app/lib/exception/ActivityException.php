@@ -8,9 +8,9 @@
 namespace app\lib\exception;
 
 
-class TokenException extends BaseException
+class ActivityException extends BaseException
 {
     public $code = '401';
-    public $msg = 'Token已过期或无效';
-    public $errorCode = 10001;
+    public $msg = '活动创建失败';
+    public $errorCode = 40001;
 }
