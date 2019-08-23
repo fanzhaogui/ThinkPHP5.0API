@@ -30,4 +30,20 @@ class BaseService
 
         return $str;
     }
+
+    /**
+     * 获取数组中的指定的键值
+     *
+     * @param $params
+     * @param $index
+     * @param string $default
+     * @return string
+     */
+    public static function getCurrentIndexValue($params, $index, $default = '')
+    {
+        if (is_array($params) && array_key_exists($index, $params) ) {
+            return $params[$index];
+        }
+        return $default;
+    }
 }

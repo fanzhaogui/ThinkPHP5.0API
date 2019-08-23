@@ -28,6 +28,6 @@ Route::get('api/:version/productrecent/:count', 'api/:version.Product/getRecent'
 Route::get('api/:version/categoryproduct/:id', 'api/:version.Product/getAllInCategory', [], ['id'=>'\d+']);
 
 
-//
-
+// 接龙
 Route::post('api/:version/activity/queue', 'api/:version.ActivityQueue/newOne');
+Route::get('api/:version/activity/info/:id', 'api/:version.ActivityQueue/getQueueInfo', [], ['id'=>'\d+']);
