@@ -9,7 +9,6 @@
 namespace app\api\controller\v1;
 
 
-use app\api\model\ActivityJoinner;
 use app\api\service\ActivityJoinnerService;
 use app\api\service\ActivityQueueService;
 use app\api\service\Token;

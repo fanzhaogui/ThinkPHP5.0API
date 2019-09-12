@@ -26,6 +26,12 @@ class Token extends BaseService
         return md5($randChars . $timestamp . $salt);
     }
 
+    /**
+     * 通过token获取用户的相关信息
+     *
+     * @return array
+     * @throws TokenException
+     */
     public static function getUserInfoByToken()
     {
         $token = request()->header('token');
@@ -46,6 +52,11 @@ class Token extends BaseService
     }
 
 
+    /**
+     * 获取当前用户的UID
+     *
+     * @return int
+     */
     public static function getCurrentUid()
     {
         return 1;
