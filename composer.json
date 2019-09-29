@@ -17,7 +17,11 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "topthink/framework": "5.0.*"
+        "topthink/framework": "5.0.*",
+        "topthink/think-testing": "v1.*"
+    },
+    "require_dev": {
+        "phpunit/dbunit": ">=1.2"
     },
     "autoload": {
         "psr-4": {

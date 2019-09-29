@@ -14,6 +14,27 @@ class Index
 {
     public function index ()
     {
-        return json([123]);
+        return <<<html
+		<html>
+		<body>
+			<form method="get" action="testForm">
+				<input type="text" name='test' value="123">
+				<input type="submit" value="submit">
+			</form>
+		</body>
+		</html>
+html;
+
+        //return json([123]);
+    }
+
+    public function testForm()
+    {
+        return 'hello';
+    }
+
+    public function test()
+    {
+        return 'hello world!';
     }
 }

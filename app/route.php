@@ -31,3 +31,9 @@ Route::get('api/:version/categoryproduct/:id', 'api/:version.Product/getAllInCat
 // 接龙
 Route::post('api/:version/activity/queue', 'api/:version.ActivityQueue/newOne');
 Route::get('api/:version/activity/info/:id', 'api/:version.ActivityQueue/getQueueInfo', [], ['id'=>'\d+']);
+
+
+// 测试
+Route::get('index/index/index', 'index/Index/index');
+Route::get('index/index/test', 'index/Index/test');
+Route::get('index/index/testForm', 'index/Index/testForm');
