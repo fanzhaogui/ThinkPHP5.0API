@@ -14,11 +14,11 @@ use app\lib\exception\ParameterException;
 class BannerValidate extends BaseValidate
 {
     protected $rule = [
-        'ids' => 'require|isIntegetString',
+        'ids' => 'require|isIntegerString',
     ];
 
     protected $message = [
-        'ids.isIntegetString' => '参数错误',
+        'ids.isIntegerString' => '参数错误',
     ];
 
     public $spRule = [
@@ -26,7 +26,7 @@ class BannerValidate extends BaseValidate
     ];
 
     // 字符串的IDs
-    protected function isIntegetString($value)
+    protected function isIntegerString($value)
     {
         if (empty(trim($value, ','))) {
             throw new ParameterException([
