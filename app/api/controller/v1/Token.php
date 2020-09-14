@@ -5,13 +5,12 @@
  * Time: 15:40
  */
 
-namespace app\api\controller;
+namespace app\api\controller\v1;
 
 
 use app\api\service\UserToken;
 use app\api\validate\TokenGet;
 use think\Controller;
-use app\api\service\Token as TokenService;
 
 class Token extends Controller
 {
@@ -25,7 +24,7 @@ class Token extends Controller
     public function getToken()
     {
         (new TokenGet())->goCheck();
-        $ut = new UserToken($this->request->param('code'));
+        $ut    = new UserToken($this->request->param('code'));
         $token = $ut->get();
 
         return json(['token' => $token]);

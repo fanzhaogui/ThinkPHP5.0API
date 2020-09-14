@@ -9,12 +9,12 @@
 namespace app\api\controller\v1;
 
 
+use app\api\controller\BaseController;
 use app\api\service\ActivityJoinnerService;
 use app\api\service\ActivityQueueService;
 use app\api\service\Token;
 use app\api\validate\ActivityJoinValidate;
 use app\api\validate\ActivityQueueValidate;
-use app\api\controller\BaseController;
 use app\api\validate\IDMustBePositiveInt;
 
 // 接龙

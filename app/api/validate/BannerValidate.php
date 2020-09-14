@@ -50,7 +50,7 @@ class BannerValidate extends BaseValidate
     protected function checkSingleId($value)
     {
         $validate = new BaseValidate($this->spRule);
-        if (!$validate->check($value)) {
+        if (!$validate->check(['id' => $value])) {
             throw new ParameterException([
                 'msg' => '传递的ID不为正整形',
             ]);

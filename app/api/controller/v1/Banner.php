@@ -44,8 +44,8 @@ class Banner
         $ids = input("get.ids");
         (new BannerValidate())->goCheck();
         $banners = BannerModel::where([
-                'id' => ['in', $ids]
-            ])
+            'id' => ['in', $ids]
+        ])
             ->select();
         if (!$banners) {
             throw new BannerMissException();
